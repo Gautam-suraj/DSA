@@ -1,0 +1,44 @@
+Given a non-empty array of integers nums, every element appears twice except for one. Find that single one.
+
+You must implement a solution with a linear runtime complexity and use only constant extra space.
+
+
+
+
+
+#include <stdio.h>
+
+int singleNumber(int* , int );
+
+int main() 
+{
+    int nums[] = { 1, 5, 1, 2, 2 };
+    int numsSize = sizeof(nums) / sizeof(nums[0]);
+    int single = singleNumber(nums, numsSize);
+    printf("The single number is: %d\n", single);
+    return 0;
+}
+
+int singleNumber(int* nums, int numsSize) 
+{
+    int result = 0;
+    
+    // If the array contains only one Value or number then this if Statement will run... //
+    if(numsSize==1)
+    {
+        return result=nums[0];
+    }
+    
+    // If the array contains more than one Value or number then this loop Statement will run... //
+    for (int i = 0; i < numsSize; i++) 
+    {
+        //  Here i am using XOR operation to find unique number..!!! //
+        result ^= nums[i];
+    }
+    return result;
+}
+
+
+
+
+
