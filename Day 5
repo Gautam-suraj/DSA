@@ -1,0 +1,42 @@
+Write a function to find the longest common prefix string amongst an array of strings.
+
+If there is no common prefix, return an empty string "".
+
+
+
+
+using System;
+
+class Program
+{
+    public static string LongestCommonPrefix(string[] strs)
+    {
+        if (strs == null || strs.Length == 0)
+            return "there is no comman prefix in the array";
+        
+        string prefix = strs[0];
+        
+        for (int i = 1; i < strs.Length; i++)
+        {
+            while (!strs[i].StartsWith(prefix))
+            {
+                prefix = prefix.Substring(0, prefix.Length - 1);
+                if (string.IsNullOrEmpty(prefix))
+                    return "there is no comman prefix in the array";
+            }
+        }
+        return prefix; 
+    }
+
+    static void Main(string[] args)
+    {
+        
+        string[] strs = { "Suraj","Sun","Sure" };
+
+       
+        string result = LongestCommonPrefix(strs);
+
+        
+        Console.WriteLine("Longest Common Prefix: " + result);
+    }
+}
