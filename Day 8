@@ -1,0 +1,49 @@
+Given an integer array nums sorted in non-decreasing order, remove the duplicates in-place such that each unique element appears only once. The relative order of the elements should be kept the same. Then return the number of unique elements in nums.
+
+
+
+
+
+using System;
+
+class Program
+{
+    static void Main()
+    {        
+        // NOTE : array should be in sorted in ascending order, if it is not then sort the array first in ascending order.
+        int[] nums = { 1, 1, 2, 2, 3, 4, 4 };
+        int uniqueCount = RemoveDuplicates(nums);
+
+        Console.WriteLine($"Number of unique elements: {uniqueCount}");
+
+        Console.WriteLine("Array after removing duplicates: ");
+    
+        for (int i = 0; i < uniqueCount; i++)
+        {
+            Console.Write(nums[i] + " ");
+        }
+    }    
+    
+    // this function is check the duplicate or repeated number and remove that number
+    public static int RemoveDuplicates(int[] nums)
+    {
+        if (nums.Length == 0)
+        {
+            return 0;
+        }
+
+        // if the array is not empty there should be atleast one unique number in a array
+        int uniqueCount = 1; 
+
+        for (int i = 1; i < nums.Length; i++)
+        {
+            if (nums[i] != nums[i - 1])
+            {
+                nums[uniqueCount] = nums[i];
+                uniqueCount++; 
+            }
+        }
+
+        return uniqueCount;
+    }
+}
