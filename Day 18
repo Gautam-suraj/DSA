@@ -1,0 +1,31 @@
+Explain how you would check if a specific word is present in a sentence.
+
+
+
+#include <stdio.h>
+#include <string.h>
+#include <stdbool.h>
+
+bool isWordPresent(const char* sentence, const char* word) {
+     return strstr(sentence, word) != NULL;
+}
+
+int main() {
+    char sentence[100], word[50];
+
+    printf("Enter a sentence: ");
+    fgets(sentence, sizeof(sentence), stdin);
+    
+    sentence[strcspn(sentence, "\n")] = '\0';
+    
+    printf("Enter a word to search for: ");
+    scanf("%s", word);
+
+if (isWordPresent(sentence, word)) {
+        printf("The word '%s' is present in the sentence.\n", word);
+    } else {
+        printf("The word '%s' is not present in the sentence.\n", word);
+    }
+
+    return 0;
+}
