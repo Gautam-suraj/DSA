@@ -1,0 +1,62 @@
+Given a string s, partition s such that every substring of the partition is a palindrome. Return all possible palindrome partitioning of s.
+
+
+
+using System;
+using System.Collections.Generic;
+
+class Program
+{
+    public static IList<IList<string>> Partition(string s)
+    {
+        var result = new List<IList<string>>();
+        var currentPartition = new List<string>();
+        Backtrack(s, 0, currentPartition, result);
+        return result;
+    }
+
+    private static void Backtrack(string s, int start, List<string> currentPartition, List<IList<string>> result)
+    {       
+        if (start == s.Length)
+        {
+            result.Add(new List<string>(currentPartition));
+            return;
+        }
+
+        for (int end = start; end < s.Length; end++)
+        {
+            if (IsPalindrome(s, start, end))
+            {
+                currentPartition.Add(s.Substring(start, end - start + 1));
+
+                Backtrack(s, end + 1, currentPartition, result);
+
+                currentPartition.RemoveAt(currentPartition.Count - 1);
+            }
+        }
+    }
+
+    private static bool IsPalindrome(string s, int start, int end)
+    {
+        while (start < end)
+        {
+            if (s[start] != s[end])
+                return false;
+            start++;
+            end--;
+        }
+        return true;
+    }
+
+    static void Main(string[] args)
+    {
+        string s = "aab";
+        var partitions = Partition(s);
+
+        Console.WriteLine("All Palindrome Partitions:");
+        foreach (var partition in partitions)
+        {
+            Console.WriteLine(string.Join(", ", partition));
+        }
+    }
+}
