@@ -1,0 +1,51 @@
+You are given an array of 0s and 1s in random order. Segregate 0s on left side and 1s on right side of the array [Basically you have to sort the array]. Traverse array only once. 
+
+
+
+
+
+
+
+using System;
+
+public class Program
+{
+    public static void Segregate0sAnd1s(int[] arr)
+    {
+        int left = 0, right = arr.Length - 1;
+
+        while (left < right)
+        {
+            // Increment left pointer while we see 0s
+            if (arr[left] == 0)
+            {
+                left++;
+            }
+            // Decrement right pointer while we see 1s
+            else if (arr[right] == 1)
+            {
+                right--;
+            }
+            // Swap arr[left] and arr[right] if arr[left] is 1 and arr[right] is 0
+            else
+            {
+                arr[left] = 0;
+                arr[right] = 1;
+                left++;
+                right--;
+            }
+        }
+    }
+
+    public static void Main()
+    {
+        int[] arr = { 0, 1, 0, 1, 1, 0, 0, 1 };
+
+        Segregate0sAnd1s(arr);
+     
+        foreach (var num in arr)
+        {
+            Console.Write(num + " ");
+        }
+    }
+}
