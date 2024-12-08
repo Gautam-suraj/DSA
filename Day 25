@@ -1,0 +1,30 @@
+Find the Largest Number and Check Divisibility by 6.
+
+
+
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        int[] arr = { 12, 45, 18, 6, 27, 30 }; // Example array
+        int largest = arr[0];
+
+        foreach (int num in arr)
+        {
+            if (num > largest)
+            {
+                largest = num;
+            }
+        }
+        if (largest % 6 == 0)
+        {
+            Console.WriteLine($"The largest number is {largest} and it is divisible by 6.");
+        }
+        else
+        {
+            Console.WriteLine($"The largest number is {largest} and it is not divisible by 6.");
+        }
+    }
+}
