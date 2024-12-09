@@ -1,0 +1,55 @@
+write a progrmam to Convert Sorted Array to Binary Search Tree.
+
+
+
+
+using System;
+
+public class TreeNode {
+    public int val;
+    public TreeNode left;
+    public TreeNode right;
+    
+    public TreeNode(int x) { val = x; }
+}
+
+public class Solution {
+   
+    public TreeNode SortedArrayToBSTHelper(int[] nums, int start, int end) {
+        if (start > end) {
+            return null;
+        }
+
+        int mid = (start + end) / 2;
+        TreeNode root = new TreeNode(nums[mid]);
+
+        root.left = SortedArrayToBSTHelper(nums, start, mid - 1);
+        root.right = SortedArrayToBSTHelper(nums, mid + 1, end);
+
+        return root;
+    }
+
+    public TreeNode SortedArrayToBST(int[] nums) {
+        return SortedArrayToBSTHelper(nums, 0, nums.Length - 1);
+    }
+
+    public void PreOrder(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        Console.Write(root.val + " ");
+        PreOrder(root.left);
+        PreOrder(root.right);
+    }
+}
+
+public class Program {
+    public static void Main() {
+        int[] nums = {-10, -3, 0, 5, 9};
+        
+        Solution solution = new Solution();
+        TreeNode root = solution.SortedArrayToBST(nums);
+    
+        solution.PreOrder(root);  // Output should be 0, -3, -10, 5, 9
+    }
+}
