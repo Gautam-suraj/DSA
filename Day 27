@@ -1,0 +1,81 @@
+write a program for Binary Tree Inorder Traversal: Perform inorder traversal on a binary tree.
+
+
+
+
+
+
+
+
+using System;
+using System.Collections.Generic;
+
+public class TreeNode
+{
+    public int val;
+    public TreeNode left;
+    public TreeNode right;
+    public TreeNode(int val = 0, TreeNode left = null, TreeNode right = null)
+    {
+        this.val = val;
+        this.left = left;
+        this.right = right;
+    }
+}
+
+public class BinaryTree
+{
+    public void InorderTraversal(TreeNode root)
+    {
+        if (root == null)
+            return;
+
+        InorderTraversal(root.left);
+
+        Console.Write(root.val + " ");
+
+        InorderTraversal(root.right);
+    }
+
+    public void InorderTraversalIterative(TreeNode root)
+    {
+        Stack<TreeNode> stack = new Stack<TreeNode>();
+        TreeNode current = root;
+
+        while (current != null || stack.Count > 0)
+        {
+            while (current != null)
+            {
+                stack.Push(current);
+                current = current.left;
+            }
+            current = stack.Pop();
+            Console.Write(current.val + " ");
+
+            current = current.right;
+        }
+    }
+}
+
+public class Program
+{
+    public static void Main()
+    {
+        TreeNode root = new TreeNode(1);
+        root.left = new TreeNode(2);
+        root.right = new TreeNode(3);
+        root.left.left = new TreeNode(4);
+        root.left.right = new TreeNode(5);
+        root.right.left = new TreeNode(6);
+        root.right.right = new TreeNode(7);
+
+        BinaryTree tree = new BinaryTree();
+
+        Console.WriteLine("Inorder Traversal (Recursive):");
+        tree.InorderTraversal(root);  // Output: 4 2 5 1 6 3 7
+        Console.WriteLine();
+
+        Console.WriteLine("Inorder Traversal (Iterative):");
+        tree.InorderTraversalIterative(root);  // Output: 4 2 5 1 6 3 7
+    }
+}
