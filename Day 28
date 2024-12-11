@@ -1,0 +1,108 @@
+Write a function to reverse a doubly linked list.
+
+
+
+
+
+
+using System;
+
+public class DoublyLinkedList
+{
+    public class Node
+    {
+        public int Data;
+        public Node Next;
+        public Node Prev;
+
+        public Node(int data)
+        {
+            Data = data;
+            Next = null;
+            Prev = null;
+        }
+    }
+
+    private Node head;
+    private Node tail;
+
+    public DoublyLinkedList()
+    {
+        head = null;
+        tail = null;
+    }
+
+    public void AddLast(int data)
+    {
+        Node newNode = new Node(data);
+        if (head == null)
+        {
+            head = newNode;
+            tail = newNode;
+        }
+        else
+        {
+            tail.Next = newNode;
+            newNode.Prev = tail;
+            tail = newNode;
+        }
+    }
+
+    public void PrintForward()
+    {
+        Node current = head;
+        while (current != null)
+        {
+            Console.Write(current.Data + " ");
+            current = current.Next;
+        }
+        Console.WriteLine();
+    }
+
+    public void Reverse()
+    {
+        Node current = head;
+        Node temp = null;
+
+        while (current != null)
+        {
+            temp = current.Next;
+            current.Next = current.Prev;
+            current.Prev = temp;
+
+            current = current.Prev;
+        }
+
+        if (temp != null)
+        {
+            head = temp.Prev;
+        }
+    }
+
+    public bool IsEmpty()
+    {
+        return head == null;
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        DoublyLinkedList list = new DoublyLinkedList();
+
+        list.AddLast(10);
+        list.AddLast(20);
+        list.AddLast(30);
+        list.AddLast(40);
+        list.AddLast(50);
+
+        Console.WriteLine("Original List:");
+        list.PrintForward();  // Output: 10 20 30 40 50
+
+        list.Reverse();
+
+        Console.WriteLine("Reversed List:");
+        list.PrintForward();  // Output: 50 40 30 20 10
+    }
+}
